@@ -111,18 +111,24 @@ func main() {
 					}
 
 					defer resp.Body.Close()
-					resp_body, _ := ioutil.ReadAll(resp.Body)
+					respBody, _ := ioutil.ReadAll(resp.Body)
 
 					fmt.Println(resp.Status)
-					result := string(resp_body)
+					result := string(respBody)
+
+					//ac, _ := c.GetAccount(context.Background(), t.Status.Account.ID)
+					message := "@" + t.Status.Account.Acct + mention + " googlebooksAPIの結果です\n" +
+						req.URL.String() + "\n"
+
+					messageLen := len(message)
 
 					length := utf8.RuneCountInString(result)
-					if length > 450 {
-						length = 450
+					if length > 500-messageLen {
+						length = 500 - messageLen
 					}
-					ac, _ := c.GetAccount(context.Background(), t.Status.Account.ID)
+
 					c.PostStatus(context.Background(), &m.Toot{
-						Status: "@" + ac.Acct + mention + " googlebooksAPIの結果です\n" +
+						Status: message +
 							string([]rune(result)[:length]),
 						Visibility:  "direct",
 						InReplyToID: t.Status.ID,
