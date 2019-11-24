@@ -1,0 +1,6 @@
+[mastodon]
+server = "https://mstdn.jp"
+clientID = "xxxx"
+clientSecret = "xxxx"
+email = "foobot@baa.com"
+password = "pwd"
