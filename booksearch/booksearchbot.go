@@ -42,7 +42,7 @@ func main() {
 
 	wsc := c.NewWSClient()
 
-	q, err := wsc.StreamingWSHashtag(context.Background(), tagname, true)
+	q, err := wsc.StreamingWSHashtag(context.Background(), tagname, false)
 	if err != nil {
 		fmt.Printf("  ERR: %s\n", err)
 	}
